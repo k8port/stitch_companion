@@ -7,7 +7,7 @@ Current Issues:  does not generate the pattern grid correctly. working on altern
 TODO: implement testing, improve modularity 
 
 Additional Features:  once basic generaton of pattern is established, start iterating on additional functionality, like:
-  - increasingly complex images with more elaborate color schemes and greate resolution (pixels per inch) 
+  - increasingly complex images with more elaborate color schemes and greater resolution (pixels per inch) 
   - incorporate embroidery stitching techniques for better texturing and detail (may require additional modeling)
   - expanding thread databse for increased options and more like renderings to original image
   - additional options for pattern generation like higher thread count Aida and alternate stitching techniques
