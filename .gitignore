@@ -85,7 +85,6 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-notebooks/*
 
 # IPython
 profile_default/
@@ -139,3 +138,4 @@ dmypy.json
 
 # PyCharm and other IDE stuff
 /.idea
+.DS_Store
