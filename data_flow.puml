@@ -1,0 +1,16 @@
+@startuml
+actor User
+User -> React: Upload Image or Provide URL
+React -> Flask/FastAPI: POST /upload
+Flask/FastAPI -> Image Processor: Process Image (based on type)
+Image Processor -> KMeans: Cluster colors (Painting)
+Image Processor -> Edge Detection: Detect edges (Icon)
+Image Processor -> Saliency Detection: Crop and adjust (Illustration)
+Image Processor -> Flask/FastAPI: Return Processed Pattern
+Flask/FastAPI -> React: GET /preview (Send Pattern)
+React -> User: Display Pattern Preview
+User -> React: Download Pattern
+React -> Flask/FastAPI: GET /download (format selection)
+Flask/FastAPI -> React: Return final downloadable file
+@enduml
+
