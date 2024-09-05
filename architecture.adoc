@@ -1,4 +1,4 @@
-0= SPEC-001: Cross Stitch Pattern Generator Application =
+= SPEC-001: Cross Stitch Pattern Generator Application =
 
 == Background == This application enables users to generate cross stitch patterns from images providef via direct upload or via a shared link. Application backend processes the image to create a simplified cross-stitch or embroidery pattern using a variety of image analysis techniques. Application front-end allows users to preview and adjust patterns, while backend processes adjust the image according to user-specified parameters like color count, image type, and other customizations.
 
