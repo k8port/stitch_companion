@@ -1,4 +1,4 @@
-= SPEC-001: Cross Stitch Pattern Generator Application =
+0= SPEC-001: Cross Stitch Pattern Generator Application =
 
 == Background == This application enables users to generate cross stitch patterns from images providef via direct upload or via a shared link. Application backend processes the image to create a simplified cross-stitch or embroidery pattern using a variety of image analysis techniques. Application front-end allows users to preview and adjust patterns, while backend processes adjust the image according to user-specified parameters like color count, image type, and other customizations.
 
@@ -120,24 +120,7 @@ Automatically crop the image based on its content using ML techniques like salie
 Aspect Ratio Preservation:
 If the image does not fit the desired aspect ratio, add padding to maintain a clean, centered pattern.
 
-Data Flow:
-plantuml
-Copy code
-@startuml
-actor User
-User -> React: Upload Image or Provide URL
-React -> Flask/FastAPI: POST /upload
-Flask/FastAPI -> Image Processor: Process Image (based on type)
-Image Processor -> KMeans: Cluster colors (Painting)
-Image Processor -> Edge Detection: Detect edges (Icon)
-Image Processor -> Saliency Detection: Crop and adjust (Illustration)
-Image Processor -> Flask/FastAPI: Return Processed Pattern
-Flask/FastAPI -> React: GET /preview (Send Pattern)
-React -> User: Display Pattern Preview
-User -> React: Download Pattern
-React -> Flask/FastAPI: GET /download (format selection)
-Flask/FastAPI -> React: Return final downloadable file
-@enduml
+![Diagram](data_flow.svg)
 
 Architecture Overview:
 Front-End: React (Axios for API calls)
