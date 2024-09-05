@@ -1,69 +1,76 @@
 = SPEC-001: Cross Stitch Pattern Generator Application =
 
-== Background == This application enables users to generate cross stitch patterns from images they provide, either via direct upload or by sharing a link to the image. The backend processes the image to create a simplified pattern using image analysis techniques like KMeans clustering to limit the color palette. The front-end will allow users to preview and adjust the pattern, while the backend processes the image according to user-specified parameters such as color count, image type, and pattern customization.
+== Background == This application enables users to generate cross stitch patterns from images providef via direct upload or via a shared link. Application backend processes the image to create a simplified cross-stitch or embroidery pattern using a variety of image analysis techniques. Application front-end allows users to preview and adjust patterns, while backend processes adjust the image according to user-specified parameters like color count, image type, and other customizations.
 
 == Requirements ==
 
-Must Have:
-A web-based front-end built with React that allows users to:
-Upload images or provide a link to an image.
-Select a type of image: "painting", "illustration", or "icon":
-"Painting": Generates a pattern using the entire image, where the user specifies how many unique colors (threads) should be part of the resulting pattern.
-"Icon": Generates a single-color pattern, ideal for distinct shapes or lettering.
-"Illustration": Focuses on the subject in the foreground, using cropping, background removal, and dynamic cropping strategies to isolate the focal point.
-Adjust pattern parameters, such as:
-Color count (for "painting")
-Thread brand for color matching (e.g., DMC, Anchor).
-Preview the generated cross stitch pattern in real-time.
-Download the pattern in a usable format (PDF, SVG, or PNG).
-A backend API (using Flask or FastAPI) that handles:
-Image upload and processing.
-Cross stitch pattern generation, based on image type and selected parameters.
-Returning the pattern to the front-end for rendering and downloading.
-Pattern generation strategies based on image type:
-For "painting": Apply KMeans clustering to limit colors.
-For "icon": Generate a single-color pattern.
-For "illustration": Apply content-aware cropping and background removal strategies:
-Edge Detection for Bounding Box: Identify subject boundaries and crop.
-Golden Ratio Cropping: Crop based on the aesthetically pleasing area around the focal point.
-Aspect Ratio Preservation: Use padding if necessary to preserve aspect ratio.
-Background Subtraction: Use color analysis to detect and remove backgrounds.
-Should Have:
-User authentication for saving and managing generated patterns.
-Real-time pattern updates when users adjust parameters.
-Fine-tuning options for adjusting the pattern after it has been generated (e.g., minor edits to color areas, thread selection).
-Could Have:
-Machine learning-based saliency detection or object detection for automatic cropping and focal point detection in "illustration" mode.
-Collaborative features for multiple users to work on patterns in future iterations.
-Won't Have (for now):
+#### Must Haves:
+1. Web-based front-end built with React that allows users to:
+  . Upload images or provide an image link
+  . Specify image type as "painting", "illustration", or "icon", where image types are described in greater detail as:
+    . "Painting": Generates patterns using the entire image, where users specify how many unique colors (threads) should be included in the resulting pattern.
+    .  "Icon": Generates single-color patterns, ideal for distinct shapes or lettering.
+    .  "Illustration": Focuses on foreground subjects and uses background removal and dynamic cropping strategies to isolate as focal point.
+  . Adjust pattern parameters, such as:
+    . Color count (for "painting")
+    . Thread brand for color matching (e.g., DMC, Anchor)
+  . Preview generated cross stitch patterns in real-time.
+  . Download patterns in a usable format (PDF, SVG, or PNG).
+2. Backend API (using Flask or FastAPI) that handles:
+  . Image uploads and processing.
+  . Cross stitch pattern generation, based on image type and selected parameters.
+  . Return of generated patterns to front-end for rendering and downloading.
+3. Pattern generation strategies based on image type, for example:
+  . "painting": Applies KMeans clustering to limit colors.
+  . "icon": Generates single-color patterns.
+  . "illustration": Applies content-aware cropping and employs varuiys background removal strategies, including:
+    . Edge Detection for Bounding Box: Identify subject boundaries and crop.
+    . Golden Ratio Cropping: Crop based on the aesthetically pleasing area around the focal point.
+    . Aspect Ratio Preservation: Uses padding as necessary to preserve aspect ratio.
+    . Background Subtraction: Uses color analysis to detect and remove backgrounds.
+
+#### Should Haves:
+1. User authentication for saving and managing generated patterns.
+2. Real-time pattern updates according to adjusted parameters.
+3. Fine-tuning of options to adjust the after initial generation (e.g., minor edits to color areas, thread selection).
+
+#### Could Haves:
+1. Machine learning-based saliency detection or object detection for automatic cropping and focal point detection in "illustration" mode.
+2. Collaborative features for multiple users to work on patterns in future iterations.
+
+#### Won't Have (for now):
 Multi-user collaboration on patterns.
 
-== Method == The technical solution will consist of three key components:
 
-Front-End (React)
-Backend API (Flask/FastAPI)
-Pattern Generation Logic
+== Method ==  Technical solution consists of three key components:
+
+  1. Front-End (React)
+  2. Backend API (Flask/FastAPI)
+  3. Pattern Generation Logic
+
 Below is a detailed breakdown of each component.
 
-1. Front-End (React)
-The front-end will serve as the user interface, allowing users to upload images, select options, preview results, and download the final pattern. React will be used for building the UI, and the app will communicate with the backend API.
+### Front-End (React)
+The front-end serves as (UI) user interface and allows users to upload images, select options, preview results, and download final patterns. React is used to build the UI and  communicate with backend API.
 
-Key Features:
+##### Key Features:
 
-Image Upload & Link Input: A form component will allow users to either upload images or input an image URL.
-Parameter Selection: Dropdowns and sliders will allow users to adjust settings, such as:
-Type of Image (Dropdown: "Painting", "Illustration", "Icon")
-Color Count (Slider for "Painting")
-Thread brand (Dropdown for color selection in "Painting" and "Illustration")
-Preview: Display the generated pattern in real-time based on user input.
-Download Option: Allow users to download the final pattern as an SVG, PNG, or PDF.
-Component Breakdown:
+**Image Upload & Link Input** 
+- Form component prompting users to upload images or input an image URL.
+- Parameter Selectors represented by dropdowns and sliders for users to adjust settings, including:
+  - Type of Image (Dropdown: "Painting", "Illustration", "Icon")
+  - Color Count (Slider for "Painting")
+  - Thread brand (Dropdown for color selection in "Painting" and "Illustration")
+  - Preview: Display the generated pattern in real-time based on user input.
+  - Download option for to download the final pattern in SVG, PNG, or PDF format.
 
-ImageUploader: Manages the image upload or link input.
-ParameterForm: Allows users to configure parameters for pattern generation.
-PatternPreview: Displays the generated pattern.
-DownloadButton: Enables users to download the pattern in the selected format.
-API Communication:
+**Component Breakdown**
+_ImageUploader_: Manages image upload or link input.
+_ParameterForm_: Allows users to configure parameters for pattern generation.
+_PatternPreview_: Displays the generated pattern.
+_DownloadButton_: Enables users to download the pattern in the selected format.
+
+**API Communication**
 
 React will communicate with the backend API using axios or fetch. The backend will return the generated pattern in a usable format (e.g., an SVG or PNG), which will be rendered in the PatternPreview component.
 2. Backend API (Flask/FastAPI)
@@ -226,15 +233,15 @@ Deploy the Flask/FastAPI application to a cloud provider such as Heroku, AWS, or
 Use Docker if necessary to package the backend into a container for deployment.
 Front-End Deployment:
 Deploy the React app using Netlify, Vercel, or a similar platform.
-== Milestones ==
 
-Front-End Setup and Image Upload Feature (2 weeks):
+== Milestones ==
+Front-End Setup and Image Upload Feature:
 Basic React app with image upload functionality.
 API endpoint to handle image data.
-Pattern Generation for 'Painting' and 'Icon' Types (3 weeks):
+Pattern Generation for 'Painting' and 'Icon' Types:
 Backend implementation for KMeans clustering and edge detection.
 Preview patterns in the front-end.
-'Illustration' Type Pattern Generation (4 weeks):
+'Illustration' Type Pattern Generation:
 Implement content-aware cropping, background removal, and aspect ratio preservation.
 API integration with the front-end for illustration-type images.
 Download Feature and Final Pattern Output (2 weeks):
