@@ -1,0 +1,7 @@
+Flask
+flask-cors
+Pillow
+opencv-python
+scikit-learn
+python-multipart
+requests
