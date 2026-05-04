@@ -28,6 +28,14 @@ env/
 venv/
 ENV/
 venv.bak/
+jlab-env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Generated patterns (runtime output)
+backend/app/generated_patterns/
 
 # Flask
 instance/
