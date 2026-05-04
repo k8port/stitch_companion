@@ -3,6 +3,7 @@
 Stitch Companion 2 is a web application that generates cross-stitch patterns from uploaded images. It features a React-based frontend and a Flask-based backend API written in Python. The backend processes images and generates patterns using algorithms such as KMeans clustering, image quantization, and color mapping to DMC threads.
 
 ## Features
+
 - Upload images to generate cross-stitch patterns.
 - Specify thread brand (e.g., DMC) and color count.
 - Supports pattern generation for different image types (e.g., paintings, illustrations, and icons).
@@ -26,6 +27,7 @@ Stitch Companion 2 is a web application that generates cross-stitch patterns fro
 │   └── package.json           # NPM dependencies
 ├── docker-compose.yml         # Docker Compose setup
 └── README.md                  # This file
+```
 
 ## Prerequisites
 
@@ -39,13 +41,15 @@ Have the following installed:
 
 Run both the frontend and backend using docker and docker-compose:
 
-1. Clone the repository
+. Clone the repository
+
 ```bash
 git clone https://github.com/yourusername/stitch_companion_2.git
 cd stitch_companion_2
 ```
 
-2. Build and start the Docker containers
+. Build and start the Docker containers
+
 Run the following commands to build and start the services:
 ```bash
 docker-compose build --no-cache
@@ -55,8 +59,10 @@ docker-compose up
 The frontend will be accessible at http://localhost:3000.
 The backend API will be accessible at http://localhost:5001.
 
-3. Stop the services
-To stop the services, run:
+### Stop the services
+
+To stop services, run:
+
 ```bash
 docker-compose down
 ```
@@ -66,23 +72,28 @@ docker-compose down
 Run the frontend and backend on your local machine:
 
 ### Backend (Flask API)
-1. Navigate to the backend directory
+
+#### Navigate to the backend directory
+
 ```bash
 cd backend
 ```
 
-2. Create a virtual environment (optional, but recommended):
+#### Create a virtual environment (optional, but recommended)
+
 ```bash
 python3 -m venv env
 source env/bin/activate  # For Windows, use `env\Scripts\activate`
 ```
 
-3. Install the required Python dependencies:
+#### Install the required Python dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Run the Flask API:
+#### Run the Flask API
+
 ```bash
 export FLASK_APP=app/routes.py
 export FLASK_ENV=development
@@ -91,29 +102,32 @@ flask run --host=0.0.0.0 --port=5001
 
 The Flask API will now be running on http://localhost:5001.
 
-
 ### Frontend (React)
-1. Navigate to the frontend directory
+
+#### Navigate to the frontend directory
+
 ```bash
 cd frontend
 ```
 
-2. Install the Node.js dependencies
+#### Install the Node.js dependencies
+
 ```bash
 npm install
 ```
 
-3. Start the React development server
+#### Start the React development server
+
 ```bash
 npm start
 ```
 
 The frontend will now be running on http://localhost:3000.
 
-### API Endpoints
+#### API Endpoints
 
 POST `/upload`
-Uploads an image for processing. This endpoint requires a `POST` request with `multipart/form-data` containing the following fields:
+Uploads an image for processing. This endpoint requires a `POST` request with `multipart/form-data` containing these fields:
 
 - `image`: The uploaded image file.
 - `image_type`: Type of the image (e.g., painting, icon, illustration).
@@ -121,19 +135,23 @@ Uploads an image for processing. This endpoint requires a `POST` request with `m
 - `thread_brand`: The brand of thread for color mapping (e.g., DMC).
 
 #### Response
+
 The response is a generated pattern image file.
 
 ## Deployment
 
 ### Docker
+
 To deploy using Docker, ensure the `docker-compose.yml` file is configured for production, and then run:
+
 ```bash
 docker-compose up --build -d
 ```
 
 ### Manual Deployment
-1. Set up the Flask API on a server with Python installed.
-2. Serve the React frontend using a tool like Nginx, Apache, or Netlify.
+
+1. Set up Flask API on server with Python installed.
+2. Serve React frontend using tool like Nginx, Apache, or Netlify.
 3. Ensure the frontend and backend are properly connected (adjust API URLs if needed).
 
 ## Contributing
@@ -152,8 +170,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 For any questions or inquiries, please reach out to k8portalatin@gmail.com.
 
-
-### Key Sections Explained:
+### Key Sections
 
 - **Project Overview**: Briefly describes the functionality of the project.
 - **Prerequisites**: Lists tools and dependencies needed to run the project locally or in Docker.
